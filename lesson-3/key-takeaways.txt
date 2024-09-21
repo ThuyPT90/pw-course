@@ -1,0 +1,217 @@
+Tổng hợp kiến thức lesson 3
+
+1. Git
+a. Thay đổi nội dung commit: 
+- Xem lịch sử commit: git log
+- Thay đổi commit message: git comit --amend
+	B1: đổi sang chế độ sang inseart (bấm i) 
+	B2:thoát khỏi insearch => bấm esc
+	B3:thoát lưu lại sự thay đổi và thoát: bấm :wq
+	   thoát không lưu q!		
+b. Undo actions
+- Đưa vùng staging về working
+	git restore -- staged <file name>
+	git status // kiểm tra status của file
+- Đưa vùng repository về working -> commit nhầm file. 
+	git reset HEAD~<số lượng commit> vd: git reset HEAD~2 (undo 2 commit)
+Note: phần này sẽ lấy ra commit mới nhất để đưa về. phần lấy commit cố định sẽ được học bài sau.
+
+c Branching model
+- Branch: để tạo vùng làm việc mới không ảnh hưởng tới vùng làm việc ổn định.
+- Tạo nhánh/ bản sao:
+	Mục đích: tạo ra bản copy để sửa và có thể gộp vào nhánh chính
+	tạo nhánh: git branch <branch name>
+		chuyển sang nhánh: git checkout <branch name>
+		vừa tạo vừa chuyển -> git checkout -b <đặt tên nhánh>
+- Chuyển về nhánh chính: git checkout -main
+- chuyển về xem revision trước có gì: git checkout <revision> 
+ 	+ revision (ảnh trong folder lesson3)
+- Cách bỏ qua -> tạo file .git ignore -> gắn file cần bỏ qua
+	+ nhập tên file vào trong .git ignore
+	+ folder có nhiều file: 
+   		add all ->  <tên folder>/
+   		add 1 file trong folder -> <tên folder>/<file name>
+2. Javascript basic:
+a. convension: quy tắc code theo format và dễ nhìn
+- snake_case: tên chữ thường dấu cách dưới
+- camelcase: đặt tên biến, chữ đầu tiên viết thường chữ sau mới viết hoa vd: const productName
+- pascalcase: tên class sẽ viết hoa chữ cái đầu vD: class ProductPage
+b. console.log:
+const a = 10 
+console.log("Gia tri cua a la ", a); -> giữ nguyên kiểu dữ liệu của a
+console.log("Gia tri cua a la " + a);
+console.log(`Gia tri cua a la ${a}`);
+console.log(`Gia tri cua a la: ${a}`);
+c. Object:
+object = đối tượng, dùng để lưu trữ tập hợp các giá trị vào cùng 1 biến hoặc hằng số
+- Khai báo: 
+let/const <ten_object> = {
+ <thuoc_tinh>: <gia_tri>
+}
+<thuoc_tinh>: giống quy tắc đặt tên biến
+<gia_tri>   : giống kiểu biến hoặc 1 object khác.
+- Cách lấy giá trị object: <thuoc_tinh>.<gia_tri>
+- Thay đổi giá tị object: <thuoc_tinh>.<gia_tri> = <khai báo cần thay đổi>
+ ví dụ: 
+	let user = {
+		name: "ThuyPT",
+		address: "Ha Noi",
+		age: 34,
+       		isMALE: false,
+		school:{
+	  		 name: "PTIT",
+	  		 major: "CNTT"	
+		}
+	}
+	console.log("Ten:",user.name);
+	console.log("Ten:", user["address"]);
+	console.log("ten truong:", user.scholl.name);
+	user.name = "Nhu";
+
+Note: nếu khai báo là const -> thì sẽ ko thể thay đổi được toàn bộ object. 
+		const student = {“name”: “alex”, “age”: 20}
+		student = {“name”: “Nagi”, “age”: 18} // lỗi
+	Tuy nhiên, nếu bạn chỉ thay đổi các thuộc tính của object thì hoàn toàn hợp lệ. Ví dụ mình sẽ
+	chỉ thay giá trị của name trong object student:
+		const student = {“name”: “alex”, “age”: 20}
+		student.name = “Nagi”; // Hợp lệ
+- Thêm thuộc tính cho object:Để thêm thuộc tính mới vào object, chúng ta chỉ cần dùng dấu . hoặc ngoặc vuông [] để định
+nghĩa thuộc tính mới. Ví dụ:
+	let bike = {
+		make: 'Yamaha',
+		model: 'YZF-R3'
+		};
+	bike.color = “Blue”;
+	bike[“price new”] = 100;
+	console.log(bike);
+	Kết quả:{make: 'Yamaha', model: 'YZF-R3', color: 'Blue', ‘price new’ : 100}
+- Xóa thuộc tính của object:Để xóa thuộc tính của object, chúng ta dùng hàm delete:
+	let employee = {
+		name: 'Le Van C',
+		age: 30,
+		department: 'HR'
+	};
+	delete employee.age;
+	console.log(employee);
+	Kết quả:{name: 'Le Van C', department: 'HR'}
+- Vòng lặp for...in có thể dùng để lặp các thuộc tính của object. Ví dụ
+	let product = {
+	'Banana': 20,
+	'Apple': 30,
+	'Orange': 15
+	};
+	for (let property in product) {
+	console.log(property);
+	}
+	// Kết quả in ra:
+		Banana
+		Apple
+		Orange
+Note: product[P] -> truy xuất giá trị product P1 
+product[P] = product["P1"] =   product.P1 
+product["P"] = product.P
+Vậy là product[P] khác khi có nháy kép product["P"]
+Khi ta truyền biến P vào trong một mệnh đề, nó sẽ lấy giá trị của biến P và thay vào vị trí đó:
+product[P] = product["P1"]
+Khi ta dùng "." để truy cập thuộc tính, ta nói với Javascript rằng, hãy lấy giá trị của thuộc tính P đi:
+product.P = product["P"]
+d. Logical operator: Toán tử logic
+- &&: cả 2 vế mệnh đều đều đúng
+- ||: một trong 2 vế đúng
+- !: đảo ngược lại giá trị của mệnh đề
+ví dụ: 
+const a = true;
+const b = false;
+if (a && b) {
+ console.log("Run code");
+}
+e. Array: 
+- Lưu trữ dữ liệu dưới dạng danh sách 
+- Tính chất của mảng: 
++ Độ đài của mảng: array.length
++ Lấy phần tử trong mảng theo index: array[index];// index là vị trí của mảng bắt đầu từ 0 đến n-1
++ vòng lăp với mảng
+- Tạo mảng
+	+ Khai báo: const/let <tên mảng> = [<phần tử 1>, <phần tử 2>, ... <phần tử n>]
+		const arr = [1, 2, 3, 4, 5];
+		let arr1 = ["1", "2", "3", "4", "5"];
+	+ Lấy độ dài: console.log(arr.length);
+	+ Truy xuất/ chỉ số mảng (in ra giá trị của mảng): console.log(k9[0]);
+f. Function: là 1 đoạn code được đặt tên, thực hiện một nhiệm vụ nào đó và có thể tái sử dụng
+- Cú pháp: 
+	+ khởi tại: function <name function>(){}	
+	+ Gọi function: <namefuction>();
+	vd: function sayHello(){
+		console.log("Say Hello");	
+	}
+	sayHello();	
+	+ Truyền tham số vào hàm: function <nam function>(biến1, bien 2... bien n){} => mục đích: truyền tham số theo mong muốn, có thể nhiều biến cùng lúc
+	vd: function sayHello2(name){
+		console.log("Hello" + name);	
+	}
+	sayHello2("Thuy); ==>KQ là: Hello Thuy
+	+ return value: hàm trả ra giá trị cho mình, sẽ ko chạy những phần sau return.
+	vd: function sum(a,b){
+		let c = a + b;
+		return c;
+		console.log(c);
+	}
+	let sum1 = sum(5,6);
+	console.log(sum1); ==> KQ là: 11
+g. Phạm vi của biến
+- var: sẽ sử dụng trong toàn bộ,không giới hạn trong {},=> nếu nhiều vòng lặp trùng tên biến --> sẽ bị sai do ko xác định chính xác biến.
+- let sẽ sử dụng trong phạm vi nhất định trong dấu {}, => nên dùng let
+h. Toán tử == và !=
+- == so sánh kiểu lỏng lẻo: so sánh về giá trị, và tự động kiểu dữ liệu
+- === So sánh tuyệt đối: bao gồm so sánh về giá trị và kiểu dữ liệu => nên dùng để check kiểu giá trị
+k. if nâng cao: if... else, if..elseif
+- 	if(condition){
+		// run code when condition 1 = true
+	}else if(condition2) {
+		// run code when condition2 = true	
+	}else if (condition3){
+		// run code when conditon 4 = true
+	}else {
+		// run code when all conditions = failse;
+	}
+l. Switch... case default:cấu trúc case điều kiện kiểm tra
+- cú pháp:
+switch(biểu thức){
+
+}
+khai báo 1 số, in ra nếu số đó là ngày trong tuần
+let ngay = 4;
+switch (ngay){
+ 	case 1: 
+		console.log ("Thứ 2");
+		break; // nếu thỏa mãn thì sẽ thoát ra {} gần nhất không chạy case dưới nữa, nếu không thì sẽ chạy tiếp case dưới
+	case 2: 
+		console.log ("Thứ 3");
+		break;
+	case 3: 
+		console.log ("Thứ 4");
+		break;
+	case 4: 
+		console.log ("Thứ 5");
+		break;
+	default: // để thoát khỏi switch case nếu giá trị khong hợp lệ
+		console.log ("Ngày không hợp lệ");
+	
+}
+
+N. Vòng lặp nâng cao: break, continue;
+- break: thoát ra khỏi {} gần nhất
+	for(let i = 0; i < 100; i++){
+		if (i % 13 === 0){
+			break; // thoát khỏi {} không chạy nữa
+		}
+		console.log(i); ==> KQ: 0, 1,... 12
+	}
+- continue: bỏ qua {} sẽ chạy tiếp câu lệnh dưới.
+	VD: for(let i = 0; i < 100; i++){
+		if (i % 13 === 0){
+			continue; // bỏ qua toán tủ i chia hết cho 13
+		}
+		console.log(i); => KQ: 0, 1, ... 13, 14...n. 
+	}
+- return là trả về, gán biến ${tên biến}
