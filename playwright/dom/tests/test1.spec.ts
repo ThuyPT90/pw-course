@@ -12,12 +12,7 @@ const interest = ['art', 'sports'];
 const country = "usa";
 // opject data 
 const testData = {
-    username: "thoaiau15",
-    email: "thoaiaust@gmail.com",
     interest: ['technology', 'art', 'sports'],
-    country: "Canada",
-    dateOfBirth: "2002-02-20",
-    biography: "Nội dung",
     rating: 0,
     color: "#ff0000"
 };
