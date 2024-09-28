@@ -34,7 +34,6 @@ function decryptCode(code) {
         } else {
             let change = code.charAt(index).toUpperCase();
             convert += change;
-
         }
     }
     return convert;
