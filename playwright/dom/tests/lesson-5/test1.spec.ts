@@ -51,7 +51,7 @@ test("Exercise 1: Register Page", async ({ page }) => {
         await page.selectOption('//select[@id= "interests"]', interest);
         // chọn nhiều giá trị trong interests sử dụng object chứa các biến file data
         await page.selectOption('//select[@id= "interests"]', testData.interest);
-        await page.locator('//input[@id = "dob"]').fill(testData.dateOfBirth);
+        await page.locator('//input[@id = "dob"]').fill(date);
         await page.locator('//input[@id = "profile"]').setInputFiles(`playwright/dom/tests/lesson-5/download.jpg`);
         await page.locator('//textarea[@id= "bio"]').fill(description);
         await page.locator('//div[@class="tooltip"]').hover();
